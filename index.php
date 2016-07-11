@@ -20,7 +20,7 @@
 						<div class="nav-wrapper">						
 							<ul id="nav-mobile" class="right hide-on-med-and-down">
 								<li>
-									<a class="modal-trigger" href="#modal1">Cadastrar Protesto</a>
+									<a class="modal-trigger" href="#modal1">Cadastrar Evento</a>
 								</li>
 								<li>
 									<a href="badges.html">Colabore</a>
@@ -38,7 +38,7 @@
 					<div class="row">
 						<div class="input-field col s12">
 							<input id="search" type="text" class="validate">
-							<label for="search">Procurar Protesto</label>
+							<label for="search">Procurar Evento</label>
 						</div>
 					</div>
 					<div class="row">
@@ -116,89 +116,89 @@
 			    <form class="col s12">
 			      <div class="row">
 			        <div class="input-field col s12">
-			          <input placeholder="Titulo" id="title" type="text" class="validate">
+			          <input placeholder="Titulo" name="register[title]" id="title" type="text" class="validate">
 			          <label for="title">Digite um titulo</label>
 			        </div>
 			      </div>
 			      <div class="row">
 			      	<div class="input-field col s12">
-				      	<textarea id="description" class="validate materialize-textarea"></textarea>
+				      	<textarea name="register[description]" id="description" class="validate materialize-textarea"></textarea>
 				      	<label for="description">Digite uma descrição</label>
 				    </div>
 			      </div>
 			      <div class="row">
 			        <div class="input-field col s4">
-			          <input placeholder="Endereço" id="street" type="text" class="validate">
+			          <input placeholder="Endereço" name="register[street]" id="street" type="text" class="validate">
 			          <label for="street">Digite o endereço do evento</label>
 			        </div>
 			        <div class="input-field col s4">
-			          <input placeholder="Número" id="number" type="text" class="validate">
+			          <input placeholder="Número" name="register[number]" id="number" type="text" class="validate">
 			          <label for="street">Digite o número aproximado do evento</label>
 			        </div>
 			        <div class="input-field col s4">
-			          <input placeholder="Bairro" id="neighborhood" type="text" class="validate">
+			          <input placeholder="Bairro" name="register[neighborhood]" id="neighborhood" type="text" class="validate">
 			          <label for="street">Digite o bairro do evento</label>
 			        </div> 
 			      </div>
 			      <div class="row">
 			        <div class="input-field col s4">
-			          <input placeholder="CEP" id="postal_code" type="text" class="validate">
+			          <input placeholder="CEP" name="register[postal_code]" id="postal_code" type="text" class="validate">
 			          <label for="postal_code">Digite o cep do evento</label>
 			        </div>
 			        <div class="input-field col s4">
-			          <input placeholder="Complemento" id="complement" type="text" class="validate">
+			          <input placeholder="Complemento" name="register[complement]" id="complement" type="text" class="validate">
 			          <label for="complement">Digite o complemento do evento</label>
 			        </div>
 			        <div class="input-field col s4">
-			          <input placeholder="Referencia" id="reference" type="text" class="validate">
+			          <input placeholder="Referencia" name="register[reference]" id="reference" type="text" class="validate">
 			          <label for="reference">Digite uma referencia de local do evento</label>
 			        </div> 
 			      </div>
 			      <div class="row">
 			        <div class="input-field col s6">
-			          <input placeholder="Estado" id="state" type="text" class="validate">
+			          <input placeholder="Estado" name="register[state]" id="state" type="text" class="validate">
 			          <label for="state">Digite o estado do evento</label>
 			        </div>
 			        <div class="input-field col s6">
-			          <input placeholder="Cidade" id="city" type="text" class="validate">
+			          <input placeholder="Cidade" name="register[city]" id="city" type="text" class="validate">
 			          <label for="city">Digite a cidade de local do evento</label>
 			        </div> 
 			      </div>
 			      <div class="row">
 			        <div class="input-field col s4">
-			          <input placeholder="Titulo do movimento" id="title" type="text" class="validate">
+			          <input placeholder="Titulo do movimento" name="register[title]" id="title" type="text" class="validate">
 			          <label for="title">Titulo do movimento</label>
 			        </div>
 			        <div class="input-field col s4">
-			          <input placeholder="Descrição" id="description" type="text" class="validate">
+			          <input placeholder="Descrição" name="register[description]" id="description" type="text" class="validate">
 			          <label for="description">Digite a descrição do movimento</label>
 			        </div>
 			        <div class="input-field col s4">
-			          <input placeholder="Facebook" id="facebook" type="text" class="validate">
+			          <input placeholder="Facebook" name="register[facebook]" id="facebook" type="text" class="validate">
 			          <label for="facebook">Facebook do movimento</label>
 			        </div> 
 			      </div>
 			      <div class="row">
 			        <div class="input-field col s4">
-			          <input placeholder="Twitter" id="twitter" type="text" class="validate">
+			          <input placeholder="Twitter" name="register[twitter]" id="twitter" type="text" class="validate">
 			          <label for="twitter">Twitter do movimento</label>
 			        </div>
 			        <div class="input-field col s4">
-			          <input placeholder="Site" id="site" type="text" class="validate">
+			          <input placeholder="Site" name="register[site]" id="site" type="text" class="validate">
 			          <label for="site">Digite a site do movimento</label>
 			        </div>
 			        <div class="input-field col s4">
-			          <input placeholder="E-mail" id="email" type="text" class="validate">
+			          <input placeholder="E-mail" name="register[email]" id="email" type="text" class="validate">
 			          <label for="email">Digite o email do movimento</label>
 			        </div> 
 			      </div>
 			      <div class="row">
 			        <div class="input-field col s6">
-			          <input placeholder="Twitter" id="phone1" type="text" class="validate">
+			          <input placeholder="Twitter" name="register[phone1]" id="phone1" type="text" class="validate">
 			          <label for="phone1">Telefone para contato</label>
 			        </div>
 			        <div class="input-field col s6">
-			          <input placeholder="Celular" id="phone2" type="text" class="validate">
+			          <input placeholder="Celular" name="register[phone2]" id="phone2" type="text" class="validate">
 			          <label for="phone2">Digite o celular para contato</label>
 			        </div> 
 			      </div>
@@ -207,7 +207,7 @@
 					    <div class="file-field input-field">
 					      <div class="btn">
 					        <span>Image</span>
-					        <input type="file" id="image">
+					        <input type="file" name="register[image]" id="image">
 					      </div>
 					      <div class="file-path-wrapper">
 					        <input class="file-path validate" type="text">
@@ -215,7 +215,7 @@
 					    </div>
 			        </div>
 			        <div class="input-field col s6" style="padding-top: 13px;">
-  						<input type="date" id="date">
+  						<input type="date" name="register[date]" id="date">
 			        </div> 
 			      </div>
 			    </form>
