@@ -34,11 +34,25 @@ $app->get('/', function ($request, $response, $args) {
     ]);
 })->setName('home');
 
+$app->get('/contato', function ($request, $response, $args) {
+    return $this->view->render($response, 'contato.html', [
+        'title' => 'Democracia nas Ruas - Contato - Protestos, palestras, debates e eventos sociais.',
+        'description' => 'Entre em contato com os mantenedores do projeto, envie sugestões, criticas, elogios.'
+    ]);
+})->setName('contato');
+
 $app->get('/{urlevent}', function ($request, $response, $args) {
     return $this->view->render($response, 'event.html', [
         'title' => 'Democracia nas Ruas - Protestos, palestras, debates e eventos sociais.',
         'description' => 'Evento feito por um movimento colaborador ou pessoa anonima.'
     ]);
 })->setName('evento');
+
+$app->get('contato', function() {
+    return $this->view->render($response, 'contato.html', [
+        'title' => 'Democracia nas Ruas - Contato - Protestos, palestras, debates e eventos sociais.',
+        'description' => 'Entre em contato com os mantenedores do projeto, envie sugestões, criticas, elogios.'
+    ]);
+})->setName('contato');
 
 $app->run();
