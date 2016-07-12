@@ -34,4 +34,11 @@ $app->get('/', function ($request, $response, $args) {
     ]);
 })->setName('home');
 
+$app->get('/{urlevent}', function ($request, $response, $args) {
+    return $this->view->render($response, 'event.html', [
+        'title' => 'Democracia nas Ruas - Protestos, palestras, debates e eventos sociais.',
+        'description' => 'Evento feito por um movimento colaborador ou pessoa anonima.'
+    ]);
+})->setName('evento');
+
 $app->run();
