@@ -55,4 +55,16 @@ $app->get('contato', function() {
     ]);
 })->setName('contato');
 
+$app->post('/register_event', function ($request, $response, $args) {
+    
+    $body = $request->getParsedBody()['register'];
+
+    $DemocraciaNasRuas = new \App\Lib\DemocraciaNasRuas($body);
+
+    $response = $DemocraciaNasRuas->post();
+
+    echo '<pre>';var_dump($response);exit;
+
+})->setName('register_event');
+
 $app->run();

@@ -28,14 +28,14 @@
 
 	<!-- Modal Structure -->
 	<div id="modal1" class="modal">
-		<div class="modal-content">
-		  	<h4>Cadastrar Evento</h4>
-		  	<p>Insira as informações no formulario abaixo</p>
-		</div>
+	    <form action="/register_event" method="POST" class="col s12">
+			<div class="modal-content">
+			  	<h4>Cadastrar Evento</h4>
+			  	<p>Insira as informações no formulario abaixo</p>
+			</div>
 
-		<div class="modal-body">
-			<div class="row">
-			    <form class="col s12">
+			<div class="modal-body">
+				<div class="row">
 			      <div class="row">
 			        <div class="input-field col s12">
 			          <input placeholder="Titulo" name="register[title]" id="title" type="text" class="validate">
@@ -137,17 +137,17 @@
 					    </div>
 			        </div>
 			        <div class="input-field col s6" style="padding-top: 13px;">
-  						<input type="date" name="register[date]" id="date">
+							<input type="date" name="register[date]" id="date">
 			        </div> 
 			      </div>
-			    </form>
+				</div>
 			</div>
-		</div>
 
-		<div class="modal-footer" style="padding-right: 25px;">
-			<a href="javascript:submitFormRegister();" class="modal-action modal-close waves-effect waves-light btn blue">Salvar</a> 
-			<a href="#!" class="modal-action modal-close waves-effect waves-light btn red" style="margin-right:15px;">Cancelar</a>
-		</div>
+			<div class="modal-footer" style="padding-right: 25px;">
+				<button class="waves-effect waves-light btn blue" type="submit">Salvar</button> 
+				<a href="#!" class="modal-action modal-close waves-effect waves-light btn red" style="margin-right:15px;">Cancelar</a>
+			</div>
+		</form>
 	</div>
 
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-rc1/jquery.min.js"></script>
@@ -168,7 +168,8 @@
 		    selectMonths: true, // Creates a dropdown to control month
 		    selectYears: 16 // Creates a dropdown of 15 years to control year
 		  });
-		          
+		     
+
 	</script>
 </body>
 </html>
