@@ -10,8 +10,11 @@ class DemocraciaNasRuas
 	protected $curl     = null;
 	protected $method   = null;
 	
-	public function __construct($input)
+	public function __construct($input=[], $files=null)
 	{        
+		if (empty($input))
+			return true;
+
 		$this->body = [
 			'protest' => [
 				'title' => $input['title'],
@@ -26,7 +29,7 @@ class DemocraciaNasRuas
 				'state' => $input['state'],
 				'city' => $input['city'],
 				'url' => $input['url'],
-				'image' => $input['image'],
+				'image' => $this->loadImage($files),
 				'url' => 'temp'
 			],
 			'organizer_protest' => [
@@ -40,8 +43,24 @@ class DemocraciaNasRuas
 				'phone2' => $input['phone2']
 			]
 		];
-
+		
 		$this->valid();
+	}
+
+	public function loadImage($files)
+	{
+		if (isset($files) && empty($files))
+			return false;
+
+		$path = $files['register']['tmp_name']['image'];
+		
+		$type = $files['register']['type']['image'];
+		
+		$data = file_get_contents($path);
+
+		$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+
+		return $base64;
 	}
 
 	public function valid()
@@ -51,9 +70,16 @@ class DemocraciaNasRuas
 
 	public function get()
 	{
+		$this->endpoint = 'http://api.democracianasruas.com.br/protests';
 		return json_decode($this->run());
 	}
 	
+	public function getById($id)
+	{
+		$this->endpoint = 'http://api.democracianasruas.com.br/protests/' . $id;
+		return json_decode($this->run());
+	}
+
 	public function post()
 	{
 		$this->method = "POST";

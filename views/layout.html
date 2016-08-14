@@ -14,7 +14,6 @@
 	<link rel="stylesheet" type="text/css" href="/assets/style.css">
 </head>
 <body>
- 	{{messages}}
 	<div class="container-flex">
     	
     	{% block body %} {% endblock %}
@@ -28,7 +27,7 @@
 
 	<!-- Modal Structure -->
 	<div id="modal1" class="modal">
-	    <form action="/register_event" method="POST" class="col s12">
+	    <form action="/register_event" method="POST" class="col s12" enctype="multipart/form-data">
 			<div class="modal-content">
 			  	<h4>Cadastrar Evento</h4>
 			  	<p>Insira as informações no formulario abaixo</p>
@@ -156,7 +155,9 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-noty/2.3.8/packaged/jquery.noty.packaged.min.js"></script>
 	<script>
-		var n = noty({text: '{{messages[0]["message"]}}'});
+		{% if messages["sucess"][0] %}
+			var n = noty({text: '{{messages["sucess"][0]}}'});
+		{% endif %}
 
 		$(document).ready(function() {
 			$('select').material_select();

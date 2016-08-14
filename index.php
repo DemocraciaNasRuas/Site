@@ -5,13 +5,8 @@ require 'vendor/autoload.php';
 
 session_start();
 
-function getMessages() {
-    $messages = $_SESSION['messages'];
-    
-    if (isset($messages) && !empty($messages))
-        return $messages;
-
-    return [];
+function object_to_array($array) {
+    return json_decode($array, true);
 }
 
 $configuration = [
@@ -29,6 +24,10 @@ $app = new \Slim\App($c);
 
 $container = $app->getContainer();
 
+$container['flash'] = function () {
+    return new \Slim\Flash\Messages();
+};
+
 $container['view'] = function ($container) {
     $view = new \Slim\Views\Twig('views', [
         'debug' => true,
@@ -43,34 +42,56 @@ $container['view'] = function ($container) {
 };
 
 $app->get('/', function ($request, $response, $args) {
+    $messages = $this->flash->getMessages();
+
+    $DemocraciaNasRuas = new \App\Lib\DemocraciaNasRuas();
+
+    $protests = $DemocraciaNasRuas->get()[0];
+
+    $protests = object_to_array($protests);
+
     return $this->view->render($response, 'home.html', [
         'title' => 'Democracia nas Ruas - Protestos, palestras, debates e eventos sociais.',
         'description' => 'Site feito especialmente para o cadastro de protestos, palestras, debates, eventos sociais e muito mais sobre politica. Doações, noticias e artigos.',
-        'messages' => getMessages()
+        'messages' => $messages,
+        'protests' => $protests
     ]);
 })->setName('home');
 
 $app->get('/contato', function ($request, $response, $args) {
+    $messages = $this->flash->getMessages();
+
     return $this->view->render($response, 'contato.html', [
         'title' => 'Democracia nas Ruas - Contato - Protestos, palestras, debates e eventos sociais.',
         'description' => 'Entre em contato com os mantenedores do projeto, envie sugestões, criticas, elogios.',
-        'messages' => getMessages()
+        'messages' => $messages
     ]);
 })->setName('contato');
 
-$app->get('/{urlevent}', function ($request, $response, $args) {
+$app->get('/{urlevent}/{id}', function ($request, $response, $args) {
+    $messages = $this->flash->getMessages();
+
+    $DemocraciaNasRuas = new \App\Lib\DemocraciaNasRuas();
+
+    $protest = $DemocraciaNasRuas->getById($id)[0];
+
+    $protest = object_to_array($protest);
+
     return $this->view->render($response, 'event.html', [
         'title' => 'Democracia nas Ruas - Protestos, palestras, debates e eventos sociais.',
         'description' => 'Evento feito por um movimento colaborador ou pessoa anonima.',
-        'messages' => getMessages()
+        'messages' => $messages,
+        'protest' => $protest[0]
     ]);
 })->setName('evento');
 
 $app->get('contato', function() {
+    $messages = $this->flash->getMessages();
+    
     return $this->view->render($response, 'contato.html', [
         'title' => 'Democracia nas Ruas - Contato - Protestos, palestras, debates e eventos sociais.',
         'description' => 'Entre em contato com os mantenedores do projeto, envie sugestões, criticas, elogios.',
-        'messages' => getMessages()
+        'messages' => $messages
     ]);
 })->setName('contato');
 
@@ -78,28 +99,20 @@ $app->post('/register_event', function ($request, $response, $args) {
     
     $body = $request->getParsedBody()['register'];
 
-    $DemocraciaNasRuas = new \App\Lib\DemocraciaNasRuas($body);
+    $DemocraciaNasRuas = new \App\Lib\DemocraciaNasRuas($body, $_FILES);
 
     $responseRegister = $DemocraciaNasRuas->post();
 
     if ($responseRegister[0] == "Protesto criado com sucesso!")
     {
-            $_SESSION['messages'][] = [
-                'type' => 'error',
-                'message' => $responseRegister[0]
-            ];
+        $this->flash->addMessage('sucess', 'Protesto criado com sucesso!');
 
-        header('Location: /');
-        exit();
+        return $response->withStatus(302)->withHeader('Location', '/');
     }
 
-    $_SESSION['messages'][] = [
-        'type' => 'error',
-        'message' => $responseRegister[0]
-    ];
+    $this->flash->addMessage('error', 'Ocorreu algum erro ao criar o protesto!');
 
-    header('Location: /');
-    exit();
+    return $response->withStatus(302)->withHeader('Location', '/');
 
 })->setName('register_event');
 

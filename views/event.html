@@ -4,7 +4,7 @@
 {% block body %}
 
 <div class="row">
-	<div class="col s12 background" style="background-image: url(http://66.media.tumblr.com/648fc1a49047658d13d2f6c1fcf7a171/tumblr_nf99gzhh7h1swxozwo1_1280.jpg) !important">		
+	<div class="col s12 background" style="background-image: url({% if protest['protests']['image'] %} {% else %} http://67.media.tumblr.com/d9811f41d301227dc8844ee27f67e885/tumblr_nejmgeR8kZ1swxozwo1_1280.jpg {% endif %}) !important">		
 		<div class="container">
 			<nav>
 				<div class="nav-wrapper">						
@@ -26,9 +26,9 @@
 			</nav>
 
 			<!-- Page Content goes here -->
-			<h1>Defesa a escola publica</h1>
+			<h1>{{ protest['protests']['title'] }}</h1>
 
-			<h2 style="font-size: 23px; top: 20px;">Por Mídia NINJA com colaboração do estudante Nathan Follmann, um dos líderes do movimento de ocupação na cidade.</h2>
+			<h2 style="font-size: 23px; top: 20px;">{{ protest['protests']['description'] }}</h2>
 		</div
 	</div>
 
@@ -37,7 +37,7 @@
 <div class="row">
 
 	<div class="col s6" id="event">
-		<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d12028.44023021033!2d-46.638639051209566!3d-23.573018136244105!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2sbr!4v1468282185563" width="100%" height="450" frameborder="0" allowfullscreen></iframe>
+		<iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBy12PsIDZ8pqaS5Z0sNPTQ4A4nh3yl0m0&q={{ protest['protests']['reference'] }},{{ protest['protests']['state'] }}" width="100%" height="450" frameborder="0" allowfullscreen></iframe>
 	</div>
 
 	<div class="col s6">
@@ -49,46 +49,44 @@
 			</ul>
         </div>
         <div id="unread" class="col s12">
-		    <p><b>Titulo:</b> Fora Temer</p>
+		    <p><b>Titulo:</b> {{ protest['protests']['title'] }}</p>
 		    
-		    <p><b>Descrição:</b> Descrição teste</p>
+		    <p><b>Descrição:</b> {{ protest['protests']['description'] }}</p>
 		    
-		    <p><b>Facebook:</b> http://www.facebook.com.br/events..</p>
+		    <p><b>Facebook:</b> {{ protest['organizer']['facebook'] }}</p>
 
-		    <p><b>Twitter:</b> http://www.twitter.com</p>
+		    <p><b>Twitter:</b> {{ protest['organizer']['twitter'] }}</p>
 		    
-		    <p><b>Site:</b> http://www.site.com</p>
+		    <p><b>Site:</b> {{ protest['protests']['site'] }}</p>
 
-		    <p><b>E-mail:</b> email@site.com</p>
+		    <p><b>E-mail:</b> {{ protest['protests']['email'] }}</p>
 
-		    <p><b>Telefone:</b> (11) 5658-2625</p>
+		    <p><b>Telefone:</b> {{ protest['organizer']['phone1'] }}</p>
 
-		    <p><b>Celular:</b> (11) 9 4566-5645</p>
+		    <p><b>Celular:</b> {{ protest['organizer']['phone2'] }}</p>
         </div>
         <div id="inbox" class="col s12">
-		    <p><b>Titulo:</b> Fora Temer</p>
+		    <p><b>Titulo:</b> {{ protest['organizer']['title'] }}</p>
 		    
-		    <p><b>Descrição:</b> Descrição teste</p>
+		    <p><b>Descrição:</b> {{ protest['organizer']['title'] }}</p>
 		    
-		    <p><b>Data:</b> 2016-01-01</p>
+		    <p><b>Data:</b> {{ protest['protests']['date'] }}</p>
+		    		    
+		    <p><b>Rua:</b> {{ protest['protests']['street'] }}</p>
+
+		    <p><b>Nº:</b> {{ protest['protests']['number'] }}</p>
 		    
-		    <p><b>Titulo:</b> Rua Salvador Dali</p>
+		    <p><b>Bairro:</b> {{ protest['protests']['neighborhood'] }}</p>
 		    
-		    <p><b>Nº:</b> 1044</p>
+		    <p><b>CEP:</b> {{ protest['protests']['postal_code'] }}</p>
 		    
-		    <p><b>Bairro:</b> Jardim Apurá</p>
+		    <p><b>Complemento:</b> {{ protest['protests']['complement'] }}</p>
 		    
-		    <p><b>CEP:</b> 04470-185</p>
+		    <p><b>Referencia:</b>  {{ protest['protests']['reference'] }}</p>
 		    
-		    <p><b>Complemento:</b> Casa</p>
+		    <p><b>Cidade:</b>  {{ protest['protests']['city'] }}</p>
 		    
-		    <p><b>Referencia:</b> Pasto</p>
-		    
-		    <p><b>Cidade:</b> São Paulo</p>
-		    
-		    <p><b>Estado:</b> São Paulo</p>
-		    
-		    <p><b>Facebook:</b> http://www.facebook.com.br/events..</p>
+		    <p><b>Estado:</b>  {{ protest['protests']['state'] }}</p>
         </div>
 
 	</div>

@@ -8,6 +8,14 @@ nav {
 	position: relative;
 }
 
+.events {
+	min-height: 345px;
+}
+
+.events .card-image .events {
+	min-height: 190px;
+}
+
 .background {
 	background-image: url(https://d3oilk4eevknv6.cloudfront.net/newsweb/mediatools/image/image/000/001/826/335_1280x853_780345352_900x600.jpg);
 	background-repeat: no-repeat;
