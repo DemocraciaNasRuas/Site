@@ -9,6 +9,23 @@ function object_to_array($array) {
     return json_decode($array, true);
 }
 
+function json_clean_decode($json, $assoc = false, $depth = 512, $options = 0) {
+    // search and remove comments like /* */ and //
+    $json = preg_replace("#(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/)|([\s\t]//.*)|(^//.*)#", '', $json);
+    
+    if(version_compare(phpversion(), '5.4.0', '>=')) {
+        $json = json_decode($json, $assoc, $depth, $options);
+    }
+    elseif(version_compare(phpversion(), '5.3.0', '>=')) {
+        $json = json_decode($json, $assoc, $depth);
+    }
+    else {
+        $json = json_decode($json, $assoc);
+    }
+
+    return $json;
+}
+
 $configuration = [
     'settings' => [
         'displayErrorDetails' => true,
@@ -58,16 +75,6 @@ $app->get('/', function ($request, $response, $args) {
     ]);
 })->setName('home');
 
-$app->get('/contato', function ($request, $response, $args) {
-    $messages = $this->flash->getMessages();
-
-    return $this->view->render($response, 'contato.html', [
-        'title' => 'Democracia nas Ruas - Contato - Protestos, palestras, debates e eventos sociais.',
-        'description' => 'Entre em contato com os mantenedores do projeto, envie sugestões, criticas, elogios.',
-        'messages' => $messages
-    ]);
-})->setName('contato');
-
 $app->get('/{urlevent}/{id}', function ($request, $response, $args) {
     $messages = $this->flash->getMessages();
 
@@ -85,7 +92,7 @@ $app->get('/{urlevent}/{id}', function ($request, $response, $args) {
     ]);
 })->setName('evento');
 
-$app->get('contato', function() {
+$app->get('/contato', function ($request, $response, $args) {
     $messages = $this->flash->getMessages();
     
     return $this->view->render($response, 'contato.html', [
@@ -94,6 +101,31 @@ $app->get('contato', function() {
         'messages' => $messages
     ]);
 })->setName('contato');
+
+$app->get('/procurar', function ($request, $response, $args) {
+
+    $filters = $_GET;
+
+    if (empty($filters['state'])) unset($filters['state']);
+
+    if (empty($filters['city'])) unset($filters['city']);
+
+    if (empty($filters['keywords'])) unset($filters['keywords']);
+
+    $DemocraciaNasRuas = new \App\Lib\DemocraciaNasRuas();
+
+    $results = $DemocraciaNasRuas->getByFilters($filters);
+
+    $results = object_to_array($results);
+    echo '<pre>';print_r($results);exit;
+    if (!isset($results[0]['protests'])) 
+    {
+        $this->flash->addMessage('sucess', 'Nenhum protesto encontrado com estes termos, tente novamente!');
+
+        return $response->withStatus(302)->withHeader('Location', '/');
+    }
+
+});
 
 $app->post('/register_event', function ($request, $response, $args) {
     

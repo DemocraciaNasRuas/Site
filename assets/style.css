@@ -12,12 +12,13 @@ nav {
 	min-height: 345px;
 }
 
-.events .card-image .events {
+.events .card-image {
 	min-height: 190px;
+	max-height: 190px;
 }
 
 .background {
-	background-image: url(https://d3oilk4eevknv6.cloudfront.net/newsweb/mediatools/image/image/000/001/826/335_1280x853_780345352_900x600.jpg);
+	background-image: url(http://67.media.tumblr.com/2cfba6e139790bb044696bdcc261e496/tumblr_mp3xde3j5N1swxozwo1_1280.jpg);
 	background-repeat: no-repeat;
 	background-attachment: scroll;
 	background-position: 100% 40%;

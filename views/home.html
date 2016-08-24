@@ -29,41 +29,36 @@
 			<!-- Page Content goes here -->
 			<h1>Democracia nas Ruas</h1>
 
-			<div class="row">
-				<div class="input-field col s12">
-					<input id="search" type="text" class="validate">
-					<label for="search">Procurar Evento</label>
-				</div>
-			</div>
-			<div class="row">
-				
-				<div class="input-field col s6">
-					<select>
-						<option value="">Escolha o estado</option>
-						<option value="1">Option 1</option>
-						<option value="2">Option 2</option>
-						<option value="3">Option 3</option>
-					</select>
-					<label>Filtro de Estado</label>
+			<form action="/procurar" method="GET">
+				<div class="row">
+					<div class="input-field col s12">
+						<input name="keywords" id="search" type="text" class="validate">
+						<label for="search">Procurar Evento</label>
+					</div>
 				</div>
 
-				<div class="input-field col s6">
-					<select multiple>
-						<option value="">Escolha a cidade</option>
-						<option value="1">Option 1</option>
-						<option value="2">Option 2</option>
-						<option value="3">Option 3</option>
-					</select>
-					<label>Filtro de Cidade</label>
+				<div class="row">
+					
+					<div class="input-field col s6">
+						<select name="state" id="estado">
+						</select>
+						<label>Filtro de Estado</label>
+					</div>
+
+					<div class="input-field col s6">
+						<select name="city" id="cidade">
+						</select>
+						<label>Filtro de Cidade</label>
+					</div>
+
 				</div>
 
-			</div>
-
-			<div class="row">
-			 	<div class="col s12 text-center">
-					<a class="waves-effect waves-light btn-large red">Procurar</a>
+				<div class="row">
+				 	<div class="col s12 text-center">
+						<button type="submit" class="waves-effect waves-light btn-large red">Procurar</button>
+					</div>
 				</div>
-			</div>
+			</form>
 
 		</div>
 	</div>

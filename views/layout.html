@@ -150,28 +150,34 @@
 	</div>
 
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-rc1/jquery.min.js"></script>
-	
+	<script type="text/javascript" src="http://cidades-estados-js.googlecode.com/files/cidades-estados-v0.2.js"></script>
+
 	<!-- Compiled and minified JavaScript -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-noty/2.3.8/packaged/jquery.noty.packaged.min.js"></script>
 	<script>
+
+		new dgCidadesEstados(document.getElementById('estado'), document.getElementById('cidade'), true);
+
+    	$('select').material_select();
+
 		{% if messages["sucess"][0] %}
 			var n = noty({text: '{{messages["sucess"][0]}}'});
 		{% endif %}
 
-		$(document).ready(function() {
-			$('select').material_select();
+		$(document).ready(function(){		    
+		    $('.modal-trigger').leanModal();
+				
+		  	$('.datepicker').pickadate({
+		    	selectMonths: true, // Creates a dropdown to control month
+		    	selectYears: 16 // Creates a dropdown of 15 years to control year
+		  	});
+
+		  	$('#estado').change(function(){
+				$('select').material_select();
+		  	})
 		});
 
-		$(document).ready(function(){
-		    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-		    $('.modal-trigger').leanModal();
-			});
-
-		  $('.datepicker').pickadate({
-		    selectMonths: true, // Creates a dropdown to control month
-		    selectYears: 16 // Creates a dropdown of 15 years to control year
-		  });
 		     
 
 	</script>
