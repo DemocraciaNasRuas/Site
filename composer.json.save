@@ -1,0 +1,15 @@
+{
+    "name": "DemocraciaNasRuas",
+    "authors": [
+        {
+          "name": "Kaio Teixeira",
+          "email": "kaio.teco@gmail.com"
+        }
+    ],
+    "require": {
+      "respect/rest": "0.5.x",
+      "respect/relational": "0.5.x",
+      "respect/config": "0.3.x",
+      "respect/validation": "0.4.x"
+    }
+}
