@@ -5,25 +5,53 @@ require 'vendor/autoload.php';
 
 session_start();
 
-function object_to_array($array) {
+function object_to_array($array) 
+{
     return json_decode($array, true);
 }
 
-function json_clean_decode($json, $assoc = false, $depth = 512, $options = 0) {
-    // search and remove comments like /* */ and //
-    $json = preg_replace("#(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/)|([\s\t]//.*)|(^//.*)#", '', $json);
-    
-    if(version_compare(phpversion(), '5.4.0', '>=')) {
-        $json = json_decode($json, $assoc, $depth, $options);
-    }
-    elseif(version_compare(phpversion(), '5.3.0', '>=')) {
-        $json = json_decode($json, $assoc, $depth);
-    }
-    else {
-        $json = json_decode($json, $assoc);
-    }
+function getStates() 
+{
+    $ch = curl_init() or die (curl_error($ch));
+    $getdata = http_build_query(
+        array(
+            'formato'       => 'json',
+            'chave'         => '6V34V44F7'
+        )
+    );
+    $options = array(
+            CURLOPT_URL => "http://www.devmedia.com.br/api/estadoscidades/service/estados/?$getdata",
+            CURLOPT_RETURNTRANSFER => 1
+    );
+    curl_setopt_array($ch, $options);
+    $result = curl_exec($ch) or die ("<p>ERRO AO FAZER A REQUISIÇÃO </p>".curl_error($ch));
+    curl_close($ch);
+ 
+    return json_decode($result);
+}
 
-    return $json;
+function getCidadesByUf($uf)
+{
+    $ch = curl_init() or die (curl_error($ch));
+    $getdata = http_build_query(
+        array(
+            'formato'       => 'json',        
+            'uf'            => $uf,
+            'chave'         => '6V34V44F7'
+        )
+    );
+    $options = array(
+            CURLOPT_URL => "http://www.devmedia.com.br/api/estadoscidades/service/cidades/?$getdata",
+            CURLOPT_RETURNTRANSFER => 1
+    );
+    
+    curl_setopt_array($ch, $options);
+    
+    $result = curl_exec($ch) or die ("<p>ERRO AO FAZER A REQUISIÇÃO </p>".curl_error($ch));
+
+    curl_close($ch);
+ 
+    return json_decode($result);
 }
 
 $configuration = [
@@ -50,11 +78,14 @@ $container['view'] = function ($container) {
         'debug' => true,
         // 'cache' => 'views/cache'
     ]);
+    
     $view->addExtension(new \Slim\Views\TwigExtension(
         $container['router'],
         $container['request']->getUri()
     ));
+    
     $view->addExtension(new Twig_Extension_Debug());
+    
     return $view;
 };
 
@@ -63,14 +94,13 @@ $app->get('/', function ($request, $response, $args) {
 
     $DemocraciaNasRuas = new \App\Lib\DemocraciaNasRuas();
 
-    $protests = $DemocraciaNasRuas->get()[0];
-
-    $protests = object_to_array($protests);
+    $protests = $DemocraciaNasRuas->get();
 
     return $this->view->render($response, 'home.html', [
         'title' => 'Democracia nas Ruas - Protestos, palestras, debates e eventos sociais.',
         'description' => 'Site feito especialmente para o cadastro de protestos, palestras, debates, eventos sociais e muito mais sobre politica. Doações, noticias e artigos.',
         'messages' => $messages,
+        'states' => getStates()->estados->uf,
         'protests' => $protests
     ]);
 })->setName('home');
@@ -88,6 +118,7 @@ $app->get('/{urlevent}/{id}', function ($request, $response, $args) {
         'title' => 'Democracia nas Ruas - Protestos, palestras, debates e eventos sociais.',
         'description' => 'Evento feito por um movimento colaborador ou pessoa anonima.',
         'messages' => $messages,
+        'states' => getStates()->estados->uf,
         'protest' => $protest[0]
     ]);
 })->setName('evento');
@@ -116,15 +147,20 @@ $app->get('/procurar', function ($request, $response, $args) {
 
     $results = $DemocraciaNasRuas->getByFilters($filters);
 
-    $results = object_to_array($results);
-    echo '<pre>';print_r($results);exit;
-    if (!isset($results[0]['protests'])) 
+    if (empty($results[0])) 
     {
         $this->flash->addMessage('sucess', 'Nenhum protesto encontrado com estes termos, tente novamente!');
 
         return $response->withStatus(302)->withHeader('Location', '/');
     }
 
+    return $this->view->render($response, 'search.html', [
+        'title' => 'Democracia nas Ruas - Busca - Protestos, palestras, debates e eventos sociais.',
+        'description' => 'Busca por - ' . http_build_query($filters),
+        'messages' => $messages,
+        'states' => getStates()->estados->uf,
+        'protests' => json_decode($results)
+   ]);
 });
 
 $app->post('/register_event', function ($request, $response, $args) {
@@ -147,5 +183,16 @@ $app->post('/register_event', function ($request, $response, $args) {
     return $response->withStatus(302)->withHeader('Location', '/');
 
 })->setName('register_event');
+
+$app->get('/states', function ($request, $response, $args) {
+
+    $states = json_decode(getStates());
+    
+    header("Content-Type: application/json");
+    
+    echo json_encode($states->estados->uf);
+    
+    exit;
+})->setName('states');
 
 $app->run();

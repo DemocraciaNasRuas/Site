@@ -83,7 +83,7 @@ class DemocraciaNasRuas
 	public function getByFilters($filters)
 	{
 		$this->endpoint = 'http://api.democracianasruas.com.br/protests?' . http_build_query($filters);
-		return json_encode($this->run());
+		return $this->run();
 	}
 
 	public function post()
