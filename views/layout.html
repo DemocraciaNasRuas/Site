@@ -15,7 +15,39 @@
 </head>
 <body>
 	<div class="container-flex">
-    	
+		<header>
+			<div class="container">
+				<nav>
+					<div class="nav-wrapper">						
+						<ul id="nav-mobile" class="right hide-on-med-and-down menu-desktop">
+							<li>
+								<a href="/">Inicio</a>
+							</li>					
+							<li>
+								<a class="modal-trigger" href="#modal1">Cadastrar Evento</a>
+							</li>
+							<li>
+								<a href="/missao-e-valores">Missão e Valores</a>
+							</li>
+							<li>
+								<a href="/contato">Contato</a>
+							</li>
+						</ul>
+
+						<ul class="right hide-on-large-only">
+							<li>
+								<a href="#" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars"></i></a>
+							</li>
+						</ul>
+					</div>
+				</nav>
+
+				<!-- Menu populado com jquery -->
+				<ul id="slide-out" class="side-nav menu-mobile"></ul>
+			</div>
+		</header>
+
+
     	{% block body %} {% endblock %}
 
 		<div class="row" id="footer">            
@@ -156,15 +188,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-noty/2.3.8/packaged/jquery.noty.packaged.min.js"></script>
 	<script>
-
-		new dgCidadesEstados(document.getElementById('estado'), document.getElementById('cidade'), true);
-
-    	$('select').material_select();
-
-		{% if messages["sucess"][0] %}
-			var n = noty({text: '{{messages["sucess"][0]}}'});
-		{% endif %}
-
 		$(document).ready(function(){		    
 		    $('.modal-trigger').leanModal();
 				
@@ -175,11 +198,22 @@
 
 		  	$('#estado').change(function(){
 				$('select').material_select();
-		  	})
+		  	});
+
+		  	$(".button-collapse").sideNav();
+
+		  	$('.menu-desktop li').each(function(index){
+				$(this).appendTo('.menu-mobile');
+			});
 		});
 
-		     
+		new dgCidadesEstados(document.getElementById('estado'), document.getElementById('cidade'), true);
 
+    	$('select').material_select();
+
+		{% if messages["sucess"][0] %}
+			var n = noty({text: '{{messages["sucess"][0]}}'});
+		{% endif %}
 	</script>
 </body>
 </html>
