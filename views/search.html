@@ -58,8 +58,7 @@
 					</div>
 
 					<div class="input-field col s6">
-						<select name="city" id="cidade">
-						</select>
+						<input type="text" name="city" id="cidade">
 						<label>Filtro de Cidade</label>
 					</div>
 
@@ -77,18 +76,17 @@
 </div>
 <div class="row">
 	{% for protest in protests %}
-
 	<div class="col s12 m3">
 		<div class="card blue-grey darken-1 events">
             <div class="card-image">
-            	<img src="{% if protest.protests.image %} {{protest.protests.image}} {% else %}http://compauta.com.br/wp-content/uploads/2015/04/Ditadura.jpg{% endif %}">
+            	<img src="{% if protest.protests_id.image %} {{protest.protests_id.image}} {% else %}http://compauta.com.br/wp-content/uploads/2015/04/Ditadura.jpg{% endif %}">
             </div>
 			<div class="card-content white-text">
-				<span class="card-title">{{ protest.protests.title }}</span>
-				<p>{{ protest.protests.description }}</p>
+				<span class="card-title">{{ protest.title }}</span>
+				<p>{{ protest.description }}</p>
 			</div>
 			<div class="card-action text-right">
-				<a class="waves-effect waves-light btn-floating blue darken-1" href="/{{ protest.protests.title|replace({' ': '-'})|lower }}/{{ protest.protests.id }}"><i class="fa fa-eye"></i></a>
+				<a class="waves-effect waves-light btn-floating blue darken-1" href="/{{ protest.title|replace({' ': '-'})|lower }}/{{ protest.id }}"><i class="fa fa-eye"></i></a>
 				<a class="waves-effect waves-light btn-floating blue darken-2 cicle" href="{{protest.organizer.twitter}}"><i class="fa fa-twitter"></i></a>
 				<a class="waves-effect waves-light btn-floating blue darken-3 cicle"href="{{protest.organizer.facebook}}"><i class="fa fa-facebook"></i></a>
 			</div>
