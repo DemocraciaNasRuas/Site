@@ -111,15 +111,13 @@ $app->get('/{urlevent}/{id}', function ($request, $response, $args) {
     $DemocraciaNasRuas = new \App\Lib\DemocraciaNasRuas();
 
     $protest = $DemocraciaNasRuas->getById($id)[0];
-
-    $protest = object_to_array($protest);
-
+    
     return $this->view->render($response, 'event.html', [
         'title' => 'Democracia nas Ruas - Protestos, palestras, debates e eventos sociais.',
         'description' => 'Evento feito por um movimento colaborador ou pessoa anonima.',
         'messages' => $messages,
         'states' => getStates()->estados->uf,
-        'protest' => $protest[0]
+        'protest' => $protest
     ]);
 })->setName('evento');
 
