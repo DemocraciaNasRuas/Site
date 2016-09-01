@@ -145,7 +145,7 @@ $app->get('/procurar', function ($request, $response, $args) {
 
     $results = $DemocraciaNasRuas->getByFilters($filters);
 
-    if (empty($results[0])) 
+    if ($results == '["N\u00e3o encontrado"]') 
     {
         $this->flash->addMessage('sucess', 'Nenhum protesto encontrado com estes termos, tente novamente!');
 

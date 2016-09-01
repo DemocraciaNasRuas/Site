@@ -7,11 +7,39 @@
 	<div class="col s12 background" style="background-image: url({% if protest.protests.image %} {% else %} http://67.media.tumblr.com/d9811f41d301227dc8844ee27f67e885/tumblr_nejmgeR8kZ1swxozwo1_1280.jpg {% endif %}) !important">		
 		<div class="container">
 		
+			<nav>
+				<div class="nav-wrapper">						
+					<ul id="nav-mobile" class="right hide-on-med-and-down">
+						<li>
+							<a href="/">Inicio</a>
+						</li>					
+						<li>
+							<a class="modal-trigger" href="#modal1">Cadastrar Evento</a>
+						</li>
+						<li>
+							<a href="/missao">Missão</a>
+						</li>
+						<li>
+							<a href="/contato">Contato</a>
+						</li>
+					</ul>
+
+					<ul class="right hide-on-large-only">
+						<li>
+							<a href="#" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars"></i></a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+			<!-- Menu populado com jquery -->
+			<ul id="slide-out" class="side-nav menu-mobile"></ul>
+			
 			<!-- Page Content goes here -->
 			<h1>{{ protest.protests.title }}</h1>
 
 			<h2 style="font-size: 23px; top: 20px;">{{ protest.protests.description }}</h2>
-		</div
+		</div>
 	</div>
 
 </div>
