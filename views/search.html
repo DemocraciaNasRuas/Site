@@ -101,7 +101,7 @@
 				<p>{{ protest.description }}</p>
 			</div>
 			<div class="card-action text-right">
-				<a class="waves-effect waves-light btn-floating blue darken-1" href="/{{ protest.title|replace({' ': '-'})|lower }}/{{ protest.id }}"><i class="fa fa-eye"></i></a>
+				<a class="waves-effect waves-light btn-floating blue darken-1" href="/{{ protest.title|replace({' ': '-'})|replace({'#': ''})|lower }}/{{ protest.protests_id.id }}"><i class="fa fa-eye"></i></a>
 				<a class="waves-effect waves-light btn-floating blue darken-2 cicle" href="{{protest.organizer.twitter}}"><i class="fa fa-twitter"></i></a>
 				<a class="waves-effect waves-light btn-floating blue darken-3 cicle"href="{{protest.organizer.facebook}}"><i class="fa fa-facebook"></i></a>
 			</div>

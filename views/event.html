@@ -4,7 +4,7 @@
 {% block body %}
 
 <div class="row">
-	<div class="col s12 background" style="background-image: url({% if protest.protests_id.image %} {% else %} http://67.media.tumblr.com/d9811f41d301227dc8844ee27f67e885/tumblr_nejmgeR8kZ1swxozwo1_1280.jpg {% endif %}) !important">		
+	<div class="col s12 background" style="background-image: url({% if protest.protests_id.image %} {{protest.protests_id.image}} {% else %} http://67.media.tumblr.com/d9811f41d301227dc8844ee27f67e885/tumblr_nejmgeR8kZ1swxozwo1_1280.jpg {% endif %}) !important">		
 		<div class="container">
 		
 			<nav>
