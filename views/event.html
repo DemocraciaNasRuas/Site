@@ -4,7 +4,7 @@
 {% block body %}
 
 <div class="row">
-	<div class="col s12 background" style="background-image: url({% if protest.protests.image %} {% else %} http://67.media.tumblr.com/d9811f41d301227dc8844ee27f67e885/tumblr_nejmgeR8kZ1swxozwo1_1280.jpg {% endif %}) !important">		
+	<div class="col s12 background" style="background-image: url({% if protest.protests_id.image %} {% else %} http://67.media.tumblr.com/d9811f41d301227dc8844ee27f67e885/tumblr_nejmgeR8kZ1swxozwo1_1280.jpg {% endif %}) !important">		
 		<div class="container">
 		
 			<nav>
@@ -36,9 +36,9 @@
 			<ul id="slide-out" class="side-nav menu-mobile"></ul>
 			
 			<!-- Page Content goes here -->
-			<h1>{{ protest.protests.title }}</h1>
+			<h1>{{ protest.protests_id.title }}</h1>
 
-			<h2 style="font-size: 23px; top: 20px;">{{ protest.protests.description }}</h2>
+			<h2 style="font-size: 23px; top: 20px;">{{ protest.protests_id.description }}</h2>
 		</div>
 	</div>
 
@@ -47,7 +47,7 @@
 <div class="row">
 
 	<div class="col s6" id="event">
-		<iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBy12PsIDZ8pqaS5Z0sNPTQ4A4nh3yl0m0&q={{ protest.protests.reference }},{{ protest.protests.state }}" width="100%" height="450" frameborder="0" allowfullscreen></iframe>
+		<iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBy12PsIDZ8pqaS5Z0sNPTQ4A4nh3yl0m0&q={{ protest.protests_id.reference }},{{ protest.protests_id.state }}" width="100%" height="450" frameborder="0" allowfullscreen></iframe>
 	</div>
 
 	<div class="col s6">
@@ -59,44 +59,44 @@
 			</ul>
         </div>
         <div id="unread" class="col s12">
-		    <p><b>Titulo:</b> {{ protest.protests.title }}</p>
+		    <p><b>Titulo:</b> {{ protest.protests_id.title }}</p>
 		    
-		    <p><b>Descrição:</b> {{ protest.protests.description }}</p>
+		    <p><b>Descrição:</b> {{ protest.protests_id.description }}</p>
 		    
-		    <p><b>Facebook:</b> {{ protest.organizer.facebook }}</p>
+		    <p><b>Facebook:</b> {{ protest.facebook }}</p>
 
-		    <p><b>Twitter:</b> {{ protest.organizer.twitter }}</p>
+		    <p><b>Twitter:</b> {{ protest.twitter }}</p>
 		    
-		    <p><b>Site:</b> {{ protest.protests.site }}</p>
+		    <p><b>Site:</b> {{ protest.protests_id.site }}</p>
 
-		    <p><b>E-mail:</b> {{ protest.protests.email }}</p>
+		    <p><b>E-mail:</b> {{ protest.protests_id.email }}</p>
 
-		    <p><b>Telefone:</b> {{ protest.organizer.phone1 }}</p>
+		    <p><b>Telefone:</b> {{ protest.phone1 }}</p>
 
-		    <p><b>Celular:</b> {{ protest.organizer.phone2 }}</p>
+		    <p><b>Celular:</b> {{ protest.phone2 }}</p>
         </div>
         <div id="inbox" class="col s12">
-		    <p><b>Titulo:</b> {{ protest.organizer.title }}</p>
+		    <p><b>Titulo:</b> {{ protest.title }}</p>
 		    
-		    <p><b>Descrição:</b> {{ protest.organizer.title }}</p>
+		    <p><b>Descrição:</b> {{ protest.description }}</p>
 		    
-		    <p><b>Data:</b> {{ protest.protests.date }}</p>
+		    <p><b>Data:</b> {{ protest.protests_id.date }}</p>
 		    		    
-		    <p><b>Rua:</b> {{ protest.protests.street }}</p>
+		    <p><b>Rua:</b> {{ protest.protests_id.street }}</p>
 
-		    <p><b>Nº:</b> {{ protest.protests.number }}</p>
+		    <p><b>Nº:</b> {{ protest.protests_id.number }}</p>
 		    
-		    <p><b>Bairro:</b> {{ protest.protests.neighborhood }}</p>
+		    <p><b>Bairro:</b> {{ protest.protests_id.neighborhood }}</p>
 		    
-		    <p><b>CEP:</b> {{ protest.protests.postal_code }}</p>
+		    <p><b>CEP:</b> {{ protest.protests_id.postal_code }}</p>
 		    
-		    <p><b>Complemento:</b> {{ protest.protests.complement }}</p>
+		    <p><b>Complemento:</b> {{ protest.protests_id.complement }}</p>
 		    
-		    <p><b>Referencia:</b>  {{ protest.protests.reference }}</p>
+		    <p><b>Referencia:</b>  {{ protest.protests_id.reference }}</p>
 		    
-		    <p><b>Cidade:</b>  {{ protest.protests.city }}</p>
+		    <p><b>Cidade:</b>  {{ protest.protests_id.city }}</p>
 		    
-		    <p><b>Estado:</b>  {{ protest.protests.state }}</p>
+		    <p><b>Estado:</b>  {{ protest.protests_id.state }}</p>
         </div>
 
 	</div>

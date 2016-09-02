@@ -13,18 +13,23 @@ function object_to_array($array)
 function getStates() 
 {
     $ch = curl_init() or die (curl_error($ch));
+    
     $getdata = http_build_query(
         array(
             'formato'       => 'json',
             'chave'         => '6V34V44F7'
         )
     );
+
     $options = array(
             CURLOPT_URL => "http://www.devmedia.com.br/api/estadoscidades/service/estados/?$getdata",
             CURLOPT_RETURNTRANSFER => 1
     );
+    
     curl_setopt_array($ch, $options);
+
     $result = curl_exec($ch) or die ("<p>ERRO AO FAZER A REQUISIÇÃO </p>".curl_error($ch));
+
     curl_close($ch);
  
     return json_decode($result);
@@ -33,6 +38,7 @@ function getStates()
 function getCidadesByUf($uf)
 {
     $ch = curl_init() or die (curl_error($ch));
+    
     $getdata = http_build_query(
         array(
             'formato'       => 'json',        
@@ -40,6 +46,7 @@ function getCidadesByUf($uf)
             'chave'         => '6V34V44F7'
         )
     );
+
     $options = array(
             CURLOPT_URL => "http://www.devmedia.com.br/api/estadoscidades/service/cidades/?$getdata",
             CURLOPT_RETURNTRANSFER => 1
@@ -110,11 +117,18 @@ $app->get('/{urlevent}/{id}', function ($request, $response, $args) {
 
     $DemocraciaNasRuas = new \App\Lib\DemocraciaNasRuas();
 
-    $protest = $DemocraciaNasRuas->getById($id)[0];
+    $protest = $DemocraciaNasRuas->getById($args['id']);
+    
+    foreach ($protest as $return) {
+        if ($return->protests_id->id == $args['id']) {
+            $protest = $return;
+            break;
+        }
+    }
     
     return $this->view->render($response, 'event.html', [
         'title' => 'Democracia nas Ruas - Protestos, palestras, debates e eventos sociais.',
-        'description' => 'Evento feito por um movimento colaborador ou pessoa anonima.',
+        'description' => $protest->description,
         'messages' => $messages,
         'states' => getStates()->estados->uf,
         'protest' => $protest

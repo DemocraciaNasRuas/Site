@@ -76,7 +76,7 @@ class DemocraciaNasRuas
 	
 	public function getById($id)
 	{
-		$this->endpoint = 'http://api.democracianasruas.com.br/protests/' . $id;
+		$this->endpoint = 'http://api.democracianasruas.com.br/protests/?id=' . $id;
 		return json_decode($this->run());
 	}
 
